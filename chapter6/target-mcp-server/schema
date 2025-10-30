@@ -1,0 +1,68 @@
+[
+  {
+    "description": "CSV形式の文字列を配列形式のJSONに変換するツール",
+    "inputSchema": {
+      "properties": {
+        "csv_string": {
+          "description": "CSV形式のテキストデータ（ヘッダー行を含む）",
+          "type": "string"
+        }
+      },
+      "required": [
+        "csv_string"
+      ],
+      "type": "object"
+    },
+    "name": "csv_to_json",
+    "outputSchema": {
+      "description": "CSV配列変換結果",
+      "properties": {
+        "result": {
+          "description": "CSVから変換されたJSONオブジェクトの配列",
+          "items": {
+            "description": "各行のデータオブジェクト",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "result"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "description": "配列形式のJSONをCSV形式の文字列に変換するツール",
+    "inputSchema": {
+      "properties": {
+        "json_list": {
+          "description": "辞書のリスト [{列名: 値, ...}, ...] 形式のデータ",
+          "items": {
+            "description": "各行のデータオブジェクト",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "json_list"
+      ],
+      "type": "object"
+    },
+    "name": "json_to_csv",
+    "outputSchema": {
+      "description": "配列からCSV変換結果",
+      "properties": {
+        "csv_string": {
+          "description": "配列から変換されたCSV形式の文字列",
+          "type": "string"
+        }
+      },
+      "required": [
+        "csv_string"
+      ],
+      "type": "object"
+    }
+  }
+]
