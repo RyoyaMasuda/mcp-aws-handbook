@@ -2,6 +2,7 @@ import asyncio
 import os
 from mcp.client.stdio import stdio_client, StdioServerParameters
 from strands import Agent
+from strands.models import BedrockModel
 from strands.tools.mcp.mcp_client import MCPClient
 from mcp.types import CallToolResult, TextContent
 from typing import Dict, List
@@ -42,9 +43,10 @@ class CalcAgent:
         system_prompt = (
             "MCPサーバーを活用して、ユーザの質問に回答してください"
         )
-       
+        # Bedrockのモデルを定義
+        model = BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0")
         return Agent(
-            name="数値計算エージェント",
+            model=model,
             system_prompt=system_prompt,
             tools=tools,
             callback_handler=None,
@@ -175,8 +177,8 @@ def evaluateAgent():
     ]
    
     # MCPツールの使用状況を評価
-    asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results[:-2]))
-    # asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results))
+    asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results))
+    # asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results[:-2]))
 
 if __name__ == "__main__":
     evaluateAgent()
