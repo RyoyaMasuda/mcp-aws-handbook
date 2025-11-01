@@ -6,19 +6,11 @@ from strands.tools.mcp import MCPClient
 import requests
 
 # AWS Cognito 認証情報
-# CLIENT_ID = "<CognitoのクライアントID>"
-# CLIENT_SECRET =  "<Cognitoのクライアントシークレット>
-# USER_POOL_ID = "<CognitoのユーザプールID>"
-# # AgentCore Gateway エンドポイント
-# GATEWAY_ENDPOINT = "<AgentCore Gatewayのエンドポイント>"
-
-
-# AWS Cognito 認証情報
-CLIENT_ID = "7meiaqolmou7e9vmpcv4btggqs"
-CLIENT_SECRET = "1ekf5anprsrf2bmu0g4ufiijru1n5n2h4rrnflspuqgg2313krjj"
-USER_POOL_ID = "us-west-2_f1osWoatX" 
+CLIENT_ID = "<CognitoのクライアントID>"
+CLIENT_SECRET =  "<Cognitoのクライアントシークレット>
+USER_POOL_ID = "<CognitoのユーザプールID>"
 # AgentCore Gateway エンドポイント
-GATEWAY_ENDPOINT = "https://data-format-transformer-search-f3r1kedqf4.gateway.bedrock-agentcore.us-west-2.amazonaws.com/mcp"
+GATEWAY_ENDPOINT = "<AgentCore Gatewayのエンドポイント>"
 
 def get_token(client_id, client_secret, user_pool_id):
     client = boto3.client('cognito-idp')
