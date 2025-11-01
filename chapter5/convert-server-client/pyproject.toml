@@ -1,0 +1,11 @@
+[project]
+name = "convert-server-client"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp>=1.20.0",
+    "requests>=2.32.5",
+    "strands-agents>=1.14.0",
+]
