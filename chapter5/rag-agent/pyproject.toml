@@ -1,0 +1,12 @@
+[project]
+name = "rag-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp>=1.20.0",
+    "nest-asyncio>=1.6.0",
+    "strands-agents>=1.14.0",
+    "streamlit>=1.51.0",
+]
