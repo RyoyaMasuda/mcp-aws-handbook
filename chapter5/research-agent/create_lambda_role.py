@@ -8,7 +8,7 @@ sts = boto3.client('sts')
 account_id = sts.get_caller_identity().get('Account')
 
 # 設定
-ROLE_NAME = 'ReseachAgentExecutionRole'
+ROLE_NAME = 'ResearchAgentExecutionRole'
 REGION = 'us-west-2'
 FUNCTION_NAME = 'research-agent'
 

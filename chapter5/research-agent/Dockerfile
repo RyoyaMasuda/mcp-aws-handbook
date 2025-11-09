@@ -19,8 +19,8 @@ ENV HOME=/tmp
 
 
 # アプリケーションファイルをコピー
-COPY reseach_agent_lambda.py ${LAMBDA_TASK_ROOT}
+COPY research_agent_lambda.py ${LAMBDA_TASK_ROOT}
 
 
 # デフォルトコマンド
-CMD ["reseach_agent_lambda.lambda_handler"]
+CMD ["research_agent_lambda.lambda_handler"]
