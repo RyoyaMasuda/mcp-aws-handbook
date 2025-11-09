@@ -1,5 +1,4 @@
 import os
-import asyncio
 from typing import Dict, List
 from mcp.client.stdio import stdio_client, StdioServerParameters
 from mcp.client.streamable_http import streamablehttp_client
@@ -12,7 +11,7 @@ STARTUP_TIMEOUT = 60
 
 
 def create_stdio_mcp_client(command: str, args: List[str], env: Dict) -> MCPClient:
-    """Stdio MCPクライアントを作成"""
+    """stdio MCPクライアントを作成"""
     return MCPClient(
         lambda: stdio_client(
             StdioServerParameters(command=command, args=args, env=env)
@@ -50,7 +49,7 @@ class ResearchAgent:
             raise ValueError("TAVILY_API_KEY環境変数が設定されていません")
        
         """MCPクライアントの設定"""
-        # Sequential Thinking用のStdioクライアント
+        # Sequential Thinking用のstdioクライアント
         self.sequential_thinking_client = create_stdio_mcp_client(
             command="npx",
             args=["-y", "@modelcontextprotocol/server-sequential-thinking", "--prefix", "/tmp"],
