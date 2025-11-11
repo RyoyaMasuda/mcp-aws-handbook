@@ -22,7 +22,7 @@ def create_stdio_mcp_client(command: str, args: List[str], env: Dict) -> MCPClie
 def create_streamable_http_mcp_client(url: str, headers: str) -> MCPClient:
     """Streamable HTTP MCPクライアントを作成する関数"""
     streamable_http_mcp_client = MCPClient(
-        lambda: streamablehttp_client( url, headers=headers),
+        lambda: streamablehttp_client( url, headers=headers, terminate_on_close=False),
         startup_timeout=60
     )
     return streamable_http_mcp_client
