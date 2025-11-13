@@ -15,8 +15,6 @@ from strands.types.content import ContentBlock, Message
 
 def with_mcp_client(func) -> ClientSession:
     async def wrapper(*args, **kwargs):
-        # server_paramsは不要
-
         mcp_client = MCPClient(
             lambda: streamablehttp_client(url="http://localhost:8000/mcp")
         )  # streamablehttp_clientからMCPClientを生成するよう変更

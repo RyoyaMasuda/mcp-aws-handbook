@@ -62,9 +62,7 @@ async def main(session: ClientSession):
             result = await session.get_prompt(
                 select_prompt_name, arguments=args
             )  # MCPサーバーからPrompts情報を取得
-            st.session_state.chat_input = result.messages[
-                0
-            ].content.text  # Promptsを「chat_input」というkeyで保持
+            st.session_state.chat_input = result.messages[0].content.text
 
     if input := st.chat_input(
         key="chat_input"

@@ -61,7 +61,7 @@ async def translate(language: str, content: str, ctx: Context) -> dict:
                 f.write(sampling_result.content.text)
 
             return {
-                "message": f"翻訳結果は{output_file.name}に出力しました。",
+                "message": f"翻訳結果を{output_file.name}に出力しました。",
                 "content": sampling_result.content.text,
             }
 
