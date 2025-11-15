@@ -8,9 +8,7 @@ ENV UV_SYSTEM_PYTHON=1 \
     PYTHONUNBUFFERED=1 \
     DOCKER_CONTAINER=1 \
     AWS_REGION=us-west-2 \
-    AWS_DEFAULT_REGION=us-west-2 \
-    BEDROCK_AGENTCORE_MEMORY_ID=convert_server_mem-ursPchHeuA \
-    BEDROCK_AGENTCORE_MEMORY_NAME=convert_server_mem
+    AWS_DEFAULT_REGION=us-west-2
 
 ## ここから追記内容 ##
 # Install Node.js and npm
@@ -24,9 +22,9 @@ RUN npm install -g @marp-team/marp-cli
 ## ここまで ##
 
 
-COPY requirementst.txt requirementst.txt
+COPY requirements.txt requirements.txt
 # Install from requirements file
-RUN uv pip install -r requirementst.txt
+RUN uv pip install -r requirements.txt
 
 
 

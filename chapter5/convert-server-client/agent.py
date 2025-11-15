@@ -1,11 +1,10 @@
 import os
 from mcp.client.stdio import stdio_client, StdioServerParameters
-from mcp.client.streamable_http import streamablehttp_client
+from mcp_proxy_for_aws.client import aws_iam_streamablehttp_client
 from strands import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp import MCPClient
 from typing import List, Dict
-import requests
 
 # AgentCore Runtime ARN
 AGENTCORE_RUNTIME_ARN = "<AgentCore RuntimeのAgent ARN>"
@@ -19,11 +18,17 @@ def create_stdio_mcp_client(command: str, args: List[str], env: Dict) -> MCPClie
     return stdio_mcp_client
 
 
-def create_streamable_http_mcp_client(url: str, headers: str) -> MCPClient:
-    """Streamable HTTP MCPクライアントを作成する関数"""
+def create_aws_iam_streamable_http_mcp_client(
+    url: str, 
+    aws_service: str = "bedrock-agentcore"
+) -> MCPClient:
+    """MCP Proxy for AWSを利用したMCPクライアントを作成する関数"""
     streamable_http_mcp_client = MCPClient(
-        lambda: streamablehttp_client( url, headers=headers, terminate_on_close=False),
-        startup_timeout=60
+        lambda: aws_iam_streamablehttp_client(
+            endpoint=url,
+            aws_service=aws_service,
+            aws_region="us-west-2", 
+        )
     )
     return streamable_http_mcp_client
 
@@ -31,25 +36,13 @@ def get_mcp_endpoint() -> str:
     encoded_arn = AGENTCORE_RUNTIME_ARN.replace(":", "%3A").replace("/", "%2F")
     return f"https://bedrock-agentcore.us-west-2.amazonaws.com/runtimes/{encoded_arn}/invocations?qualifier=DEFAULT"
 
-def get_token():
-    response = requests.post(
-        "https://us-west-xxxxx.auth.us-west-2.amazoncognito.com/oauth2/token",
-        data="grant_type=client_credentials&client_id=<クライアントID>&client_secret=<クライアントシークレット>&scope=default-m2m-resource-server-xxxx/read",
-        headers={'Content-Type': 'application/x-www-form-urlencoded'}
-    )
-    jwtToken = response.json()["access_token"]
-    return jwtToken
-
 prompt = """
 DynamoDBのtech_topic_reportから最新の技術レポートを取得して、それをPPT形式に変換してください。
 完了後は変換したファイルを取得するURLをユーザへ明示してください。
 """
 def main():
     mcp_endpoint = get_mcp_endpoint()
-    token = get_token()
-    headers = {"authorization": f"Bearer {token}","Content-Type":"application/json"}
-
-    gateway_server_cleint = create_streamable_http_mcp_client(mcp_endpoint, headers)
+    gateway_server_cleint = create_aws_iam_streamable_http_mcp_client(mcp_endpoint)
     dynamodb_client = create_stdio_mcp_client(
         command="uvx",  # npxコマンドを使用してMCPサーバーを起動
         args=["awslabs.aws-api-mcp-server@latest"],
