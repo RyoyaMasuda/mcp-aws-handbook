@@ -5,6 +5,6 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "requests>=2.32.5",
+    "mcp-proxy-for-aws>=1.1.0",
     "strands-agents>=1.14.0",
 ]
