@@ -8,7 +8,7 @@ from strands.types.content import Messages
 
 # RAGエージェントクラス
 class RagAgent:
-    def __init__(self, aws_profile: str = "dev", aws_region: str = "us-west-2"):
+    def __init__(self):
         """RAGエージェントを初期化"""
         # AWS公式Knowledge MCPサーバーへの接続
         self.aws_knowledge_mcp_client = self.create_streamable_http_mcp_client("https://knowledge-mcp.global.api.aws")
