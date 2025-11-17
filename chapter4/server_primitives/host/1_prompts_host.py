@@ -64,9 +64,7 @@ async def main(session: ClientSession):
             )  # MCPサーバーからPrompts情報を取得
             st.session_state.chat_input = result.messages[0].content.text
 
-    if input := st.chat_input(
-        key="chat_input"
-    ):  # keyの指定を追加。該当のkeyで保持された値がセットされる
+    if input := st.chat_input(key="chat_input"):
         user_content: list[ContentBlock] = []
 
         user_content.append({"text": input})
@@ -77,8 +75,8 @@ async def main(session: ClientSession):
                 st.write(content["text"])
 
         model = BedrockModel(
-            model_id="jp.anthropic.claude-haiku-4-5-20251001-v1:0",
-            region_name="ap-northeast-1",
+            model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0",
+            region_name="us-west-2",
         )
 
         agent = Agent(model=model, callback_handler=None)

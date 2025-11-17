@@ -82,8 +82,8 @@ async def main(mcp_client: MCPClient):
                 st.write(content["text"])
 
         model = BedrockModel(
-            model_id="jp.anthropic.claude-haiku-4-5-20251001-v1:0",
-            region_name="ap-northeast-1",
+            model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0",
+            region_name="us-west-2",
         )
 
         agent = Agent(
