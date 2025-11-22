@@ -28,6 +28,7 @@ def create_aws_iam_streamable_http_mcp_client(
             endpoint=url,
             aws_service=aws_service,
             aws_region="us-west-2", 
+            terminate_on_close=False,
         )
     )
     return streamable_http_mcp_client
@@ -37,7 +38,7 @@ def get_mcp_endpoint() -> str:
     return f"https://bedrock-agentcore.us-west-2.amazonaws.com/runtimes/{encoded_arn}/invocations?qualifier=DEFAULT"
 
 prompt = """
-DynamoDBのtech_topic_reportから最新の技術レポートを取得して、それをPPT形式に変換してください。
+DynamoDBのtech-reportテーブルから最新の技術レポートを取得して、それをPPT形式に変換してください。
 完了後は変換したファイルを取得するURLをユーザへ明示してください。
 """
 def main():
@@ -45,7 +46,7 @@ def main():
     gateway_server_cleint = create_aws_iam_streamable_http_mcp_client(mcp_endpoint)
     dynamodb_client = create_stdio_mcp_client(
         command="uvx",  # npxコマンドを使用してMCPサーバーを起動
-        args=["awslabs.aws-api-mcp-server@latest"],
+        args=["awslabs.aws-api-mcp-server@1.1.7"],
         env={
             "AWS_ACCESS_KEY_ID": os.getenv("AWS_ACCESS_KEY_ID"),
             "AWS_SECRET_ACCESS_KEY":os.getenv("AWS_SECRET_ACCESS_KEY"),
