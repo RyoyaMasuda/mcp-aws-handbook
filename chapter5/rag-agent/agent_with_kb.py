@@ -32,7 +32,7 @@ class RagAgent:
         return streamable_http_mcp_client
     
     def create_stdio_mcp_client(self, command: str, args: list[str], env: dict) -> MCPClient:
-        """Stdio MCPクライアントを作成する関数"""
+        """stdio MCPクライアントを作成する関数"""
         stdio_mcp_client = MCPClient(
             lambda: stdio_client(
                 StdioServerParameters(command=command, args=args, env=env)
