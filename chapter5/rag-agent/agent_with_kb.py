@@ -5,13 +5,25 @@ from strands import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp.mcp_client import MCPClient
 from strands.types.content import Messages
+from typing import List, Dict
 
 # RAGエージェントクラス
 class RagAgent:
     def __init__(self):
         """RAGエージェントを初期化"""
-        # AWS公式Knowledge MCPサーバーへの接続
-        self.aws_knowledge_mcp_client = self.create_streamable_http_mcp_client("https://knowledge-mcp.global.api.aws")
+        # AWS MCPサーバーへの接続
+        self.aws_mcp_client = self.create_stdio_mcp_client(
+            command="uvx",
+            args=[
+                "mcp-proxy-for-aws@1.1.4",
+                "https://aws-mcp.us-east-1.api.aws/mcp",
+                "--metadata", "AWS_REGION=us-west-2"
+            ],
+            env={
+                "AWS_ACCESS_KEY_ID": os.getenv("AWS_ACCESS_KEY_ID"),
+                "AWS_SECRET_ACCESS_KEY":os.getenv("AWS_SECRET_ACCESS_KEY"),
+            }
+        )
         # AWS Bedrock Knowledge Base MCPサーバーへの接続設定
         self.aws_kb_mcp_client = self.create_stdio_mcp_client(
             command="uvx",  # uvxコマンドを使用してMCPサーバーを起動
@@ -22,16 +34,8 @@ class RagAgent:
                 "AWS_REGION": "us-west-2",  # AWSリージョン
             }
         )
-
-    def create_streamable_http_mcp_client(self, url: str) -> MCPClient:
-        """Streamable HTTP MCPクライアントを作成する関数"""
-        streamable_http_mcp_client = MCPClient(
-            lambda: streamablehttp_client(url),
-            startup_timeout=60
-        )
-        return streamable_http_mcp_client
     
-    def create_stdio_mcp_client(self, command: str, args: list[str], env: dict) -> MCPClient:
+    def create_stdio_mcp_client(self, command: str, args: List[str], env: Dict) -> MCPClient:
         """stdio MCPクライアントを作成する関数"""
         stdio_mcp_client = MCPClient(
             lambda: stdio_client(
@@ -51,8 +55,8 @@ class RagAgent:
         )
 
     async def stream(self, messages: Messages):
-        with self.aws_knowledge_mcp_client,  self.aws_kb_mcp_client:
-            tools = self.aws_knowledge_mcp_client.list_tools_sync()
+        with self.aws_mcp_client,  self.aws_kb_mcp_client:
+            tools = self.aws_mcp_client.list_tools_sync()
             tools.extend(self.aws_kb_mcp_client.list_tools_sync())
 
             # エージェントの生成
