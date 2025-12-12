@@ -64,7 +64,8 @@ class CalcAgent:
             agent = self.create_agent(tools=addsub_mcp_tools + muldiv_mcp_tools)
             response = agent(query)
             return response, addsub_mcp_tools, muldiv_mcp_tools
-def extract_tool_results(data) -> List[Dict]:
+        
+def extract_tool_results(data):
     """エージェント実行データからツール使用結果を抽出"""
     results = []
     for cycle in data.get("traces", []):
@@ -72,7 +73,7 @@ def extract_tool_results(data) -> List[Dict]:
         results.extend(convert_tool_results(tools))
     return results
 
-def collect_tools(cycle) -> Dict[str, Dict]:
+def collect_tools(cycle):
     """実行サイクルからツール情報を収集"""
     tools = {}
    
@@ -99,7 +100,7 @@ def collect_tools(cycle) -> Dict[str, Dict]:
    
     return tools
 
-def convert_tool_results(tools: Dict[str, Dict]) -> List[Dict]:
+def convert_tool_results(tools):
     """ツール情報をMCPToolCall形式に変換"""
     results = []
    
