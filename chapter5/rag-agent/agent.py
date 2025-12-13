@@ -38,7 +38,7 @@ class RagAgent:
         # エージェントを初期化
         return Agent(
             model=BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0"),
-            system_prompt="AWSに関する質問はAWS Knowledge MCPサーバーを用いて回答してください。その参考先も定義してください。",
+            system_prompt="AWSに関する質問はAWS MCPサーバーを用いて回答してください。その参考先も定義してください。",
             tools=tools,
             callback_handler=None,
         )
