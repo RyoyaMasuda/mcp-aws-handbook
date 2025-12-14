@@ -91,7 +91,7 @@ class ResearchAgent:
 if __name__ == "__main__":
     # 調査基準日を指定
     from datetime import date
-    date = date.today().strftime('%Y-%m-%d')
+    date = date.today().strftime("%Y-%m-%d")
     agent = ResearchAgent()
     agent.generate_report(date)
 
