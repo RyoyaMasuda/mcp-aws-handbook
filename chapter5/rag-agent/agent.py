@@ -14,7 +14,7 @@ class RagAgent:
         self.aws_mcp_client = self.create_stdio_mcp_client(
             command="uvx",
             args=[
-                "mcp-proxy-for-aws@1.1.4",
+                "mcp-proxy-for-aws@1.1.5",
                 "https://aws-mcp.us-east-1.api.aws/mcp",
                 "--metadata", "AWS_REGION=us-west-2"
             ],

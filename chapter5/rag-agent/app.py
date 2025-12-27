@@ -11,7 +11,7 @@ st.set_page_config(page_title="RAGチャットアプリ", page_icon="🤖")
 # タイトルを描画
 st.title("RAGチャットアプリ")
 
-# メッセージ履歴の初期化
+# 会話履歴の初期化
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -44,9 +44,10 @@ async def main():
             st.markdown(prompt)
 
         try:
-            async for message in st.session_state.agent.stream(st.session_state.messages):
-                print_message(message)
-                st.session_state.messages.append(message)
+            with st.spinner("回答を生成中..."):
+                async for message in st.session_state.agent.stream(st.session_state.messages):
+                    print_message(message)
+                    st.session_state.messages.append(message)
 
         except Exception as e:
             st.write(f"エラーが発生しました: {e}")

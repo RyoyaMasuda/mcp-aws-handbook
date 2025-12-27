@@ -14,7 +14,7 @@ class RagAgent:
         self.aws_mcp_client = self.create_stdio_mcp_client(
             command="uvx",
             args=[
-                "mcp-proxy-for-aws@1.1.4",
+                "mcp-proxy-for-aws@1.1.5",
                 "https://aws-mcp.us-east-1.api.aws/mcp",
                 "--metadata", "AWS_REGION=us-west-2"
             ],
@@ -26,7 +26,7 @@ class RagAgent:
         # AWS Bedrock Knowledge Base MCPサーバーへの接続設定
         self.aws_kb_mcp_client = self.create_stdio_mcp_client(
             command="uvx",  # uvxコマンドを使用してMCPサーバーを起動
-            args=["awslabs.bedrock-kb-retrieval-mcp-server@1.0.10"],  # AWS Labs提供のKB検索MCPサーバー
+            args=["awslabs.bedrock-kb-retrieval-mcp-server@1.0.12"],  # AWS Labs提供のKB検索MCPサーバー
             env={
                 "AWS_ACCESS_KEY_ID": os.getenv("AWS_ACCESS_KEY_ID"),
                 "AWS_SECRET_ACCESS_KEY": os.getenv("AWS_SECRET_ACCESS_KEY"),
