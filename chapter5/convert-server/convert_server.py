@@ -95,7 +95,7 @@ def _upload_to_s3(file_name: str, bucket_name: str, key: str) -> str:
    
     return response
 
-BUCKET = "bucket-654654377904"  # S3バケット名
+BUCKET = "<S3バケット名>"  # S3バケット名 : slide-data-<AWSアカウントID>" 
 TEMP_FILE_PATH = "report_tmp.md"  # 一時ファイルのパス
 
 @mcp.tool()
