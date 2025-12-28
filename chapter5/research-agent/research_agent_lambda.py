@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List
 from mcp.client.stdio import stdio_client, StdioServerParameters
-from mcp.client.streamable_http import streamablehttp_client
+from mcp.client.streamable_http import streamable_http_client
 from strands import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp.mcp_client import MCPClient
@@ -23,7 +23,7 @@ def create_stdio_mcp_client(command: str, args: List[str], env: Dict) -> MCPClie
 def create_streamable_http_mcp_client(url: str) -> MCPClient:
     """Streamable HTTP MCPクライアントを作成"""
     return MCPClient(
-        lambda: streamablehttp_client(url),
+        lambda: streamable_http_client(url),
         startup_timeout=STARTUP_TIMEOUT
     )
 
@@ -52,7 +52,7 @@ class ResearchAgent:
         # Sequential Thinking用のstdioクライアント
         self.sequential_thinking_client = create_stdio_mcp_client(
             command="npx",
-            args=["-y", "@modelcontextprotocol/server-sequential-thinking", "--prefix", "/tmp"],
+            args=["-y", "@modelcontextprotocol/server-sequential-thinking@2025.12.18", "--prefix", "/tmp"],
             env={}
         )
         # Tavily検索用のHTTPクライアント
