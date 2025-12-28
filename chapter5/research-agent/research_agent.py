@@ -7,7 +7,7 @@ from strands.models import BedrockModel
 from strands.tools.mcp.mcp_client import MCPClient
 
 # タイムアウト時間
-STARTUP_TIMEOUT = 60
+STARTUP_TIMEOUT = 90
 
 
 def create_stdio_mcp_client(command: str, args: List[str], env: Dict) -> MCPClient:

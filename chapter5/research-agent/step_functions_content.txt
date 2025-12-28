@@ -1,0 +1,20 @@
+# Lambda Invokeのペイロード内容
+{
+  "date": "{% $split($states.context.Execution.StartTime, \"T\")[0] ~> $replace(\"-\", \"/\") %}"
+}
+
+# DynamoDB PutItemの引数内容
+{ 
+  "TableName": "tech-report",
+  "Item": { 
+    "id": { 
+      "S": "{% $states.context.Execution.Name %}"
+    },
+    "date": { 
+      "S": "{% $split($states.context.Execution.StartTime, \"T\")[0] ~> $replace(\"-\", \"/\") %}"
+    },
+    "report": { 
+      "S": "{% $states.input %}"
+    }
+  }
+}
