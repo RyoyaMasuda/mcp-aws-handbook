@@ -47,7 +47,7 @@ def main():
     aws_mcp_client = create_stdio_mcp_client(
         command="uvx",  
         args=[
-            "mcp-proxy-for-aws@1.1.4",
+            "mcp-proxy-for-aws@1.1.5",
             "https://aws-mcp.us-east-1.api.aws/mcp",
             "--metadata", "AWS_REGION=us-west-2"
         ],
@@ -56,8 +56,8 @@ def main():
             "AWS_SECRET_ACCESS_KEY":os.getenv("AWS_SECRET_ACCESS_KEY"),
         }
     )
-    with gateway_server_cleint, aws_mcp_client:
-        tools = gateway_server_cleint.list_tools_sync()
+    with gateway_server_client, aws_mcp_client:
+        tools = gateway_server_client.list_tools_sync()
         tools.extend(aws_mcp_client.list_tools_sync())
         # Bedrockのモデルを定義
         model = BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0")
