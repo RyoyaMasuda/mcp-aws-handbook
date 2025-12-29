@@ -182,7 +182,7 @@ def evaluateAgent():
    
     # MCPツールの使用状況を評価
     asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results))
-    # asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results[:-2]))
+    # asyncio.run(eval_mcp_use(query, response.message, mcp_servers, call_tool_results[1:]))
 
 if __name__ == "__main__":
     evaluateAgent()
