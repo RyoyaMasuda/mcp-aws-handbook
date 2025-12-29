@@ -44,7 +44,7 @@ class CalcAgent:
             "MCPサーバーを活用して、ユーザの質問に回答してください"
         )
         # Bedrockのモデルを定義
-        model = BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0")
+        model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-5-20250929-v1:0")
         return Agent(
             model=model,
             system_prompt=system_prompt,
@@ -149,13 +149,16 @@ async def eval_mcp_use(input, output, mcp_servers, call_tool_results):
 
     # 評価モデルを初期化
     deepeval_model = AmazonBedrockModel(
-        model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0",
-        region_name="us-west-2"
+        model="us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        region="us-west-2",
+        cost_per_input_token=0.000001,
+        cost_per_output_token=0.000005,
     )
    
     # MCPの使用状況を評価
     mcp_use_metrics = MCPUseMetric(threshold=0.8, model=deepeval_model, include_reason=True)
     evaluate(test_cases=[test_case], metrics=[mcp_use_metrics])
+    await deepeval_model.close()
 
 def evaluateAgent():
     """メイン実行関数：RAGエージェントの動作例とMCP評価のデモ"""
