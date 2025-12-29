@@ -8,8 +8,10 @@ from deepeval import evaluate
 async def eval_relevance():
     # 評価モデルを初期化
     deepeval_model = AmazonBedrockModel(
-        model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0",
-        region_name="us-west-2"
+        model="us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        region="us-west-2",
+        cost_per_input_token=0.000001,
+        cost_per_output_token=0.000005,
     )
 
     # 評価メトリクスの設定
@@ -30,6 +32,7 @@ async def eval_relevance():
         actual_output="今日の天気は晴れです。外出しやすく洗濯日和でしょう。",
     )
     evaluate(test_cases=[test_case], metrics=[metric])
+    await deepeval_model.close()
 
 
 if __name__ == "__main__":
