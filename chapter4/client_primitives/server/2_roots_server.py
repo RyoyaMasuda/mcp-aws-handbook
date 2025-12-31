@@ -13,6 +13,7 @@ async def translate(language: str, content: str, ctx: Context) -> dict:
         language: 翻訳先の言語（日本語、英語など）
         content: 翻訳する内容
     """
+
     sampling_result = await ctx.session.create_message(
         system_prompt="あなたは優秀な翻訳家です。翻訳結果だけを回答してください。",
         messages=[
@@ -42,6 +43,7 @@ async def translate(language: str, content: str, ctx: Context) -> dict:
             "message": f"翻訳結果を{output_file.name}に出力しました。",
             "content": sampling_result.content.text,
         }
+
     else:
         return {
             "message": "ファイルへの出力を中止しました。",

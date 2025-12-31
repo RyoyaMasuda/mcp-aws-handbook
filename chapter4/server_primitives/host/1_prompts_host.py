@@ -64,7 +64,9 @@ async def main(session: ClientSession):
             )  # MCPサーバーからPrompts情報を取得
             st.session_state.chat_input = result.messages[0].content.text
 
-    if input := st.chat_input(key="chat_input"):
+    if input := st.chat_input(
+        key="chat_input"
+    ):  # keyの指定を追加。該当のkeyで保持された値がセットされる
         user_content: list[ContentBlock] = []
 
         user_content.append({"text": input})
