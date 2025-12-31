@@ -6,7 +6,7 @@ from mcp import (
     GetPromptResult,
     ListPromptsResult,
 )
-from mcp.client.streamable_http import streamablehttp_client
+from mcp.client.streamable_http import streamable_http_client
 from strands.agent import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp import MCPAgentTool, MCPClient
@@ -16,9 +16,8 @@ from strands.types.content import ContentBlock, Message
 def with_mcp_client(func) -> ClientSession:
     async def wrapper(*args, **kwargs):
         mcp_client = MCPClient(
-            lambda: streamablehttp_client(url="http://localhost:8000/mcp")
-        )  # streamablehttp_clientからMCPClientを生成するよう変更
-
+            lambda: streamable_http_client(url="http://localhost:8000/mcp")
+        )  # streamable_http_clientからMCPClientを生成するよう変更
         with mcp_client:
             return await func(mcp_client, *args, **kwargs)
 
@@ -71,7 +70,9 @@ async def main(mcp_client: MCPClient):
             if st.checkbox(tool.tool_name, value=True):
                 select_tool.append(tool)
 
-    if input := st.chat_input(key="chat_input"):
+    if input := st.chat_input(
+        key="chat_input"
+    ):  # keyの指定を追加。該当のkeyで保持された値がセットされる
         user_content: list[ContentBlock] = []
 
         user_content.append({"text": input})
@@ -88,7 +89,7 @@ async def main(mcp_client: MCPClient):
 
         agent = Agent(
             model=model,
-            tools=select_tool,
+            tools=select_tool,  # ここを追加
             callback_handler=None,
         )
 

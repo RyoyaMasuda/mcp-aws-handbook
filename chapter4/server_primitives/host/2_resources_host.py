@@ -65,7 +65,7 @@ async def main(session: ClientSession):
             )  # MCPサーバーからPrompts情報を取得
             st.session_state.chat_input = result.messages[0].content.text
 
-    # Resouces
+    # Resources
     with st.sidebar:
         st.divider()
         st.subheader("Resources")
@@ -91,6 +91,7 @@ async def main(session: ClientSession):
                 text = result.contents[0].text
 
                 user_content.append({"text": text})
+
         for content in user_content:
             with st.chat_message("user"):
                 st.write(content["text"])
