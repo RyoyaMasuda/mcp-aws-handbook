@@ -17,13 +17,13 @@ class CalcAgent:
     def __init__(self):
         # 足し算、引き算するMCPサーバーとのクライアントを生成
         self.addsub_mcp_server = self.create_stdio_mcp_client(
-            command="python",  
-            args=["./addsub_server.py"],
+            command="uv",  
+            args=["run", "./addsub_server.py"],
         )
         # 掛け算、割り算するMCPサーバーとのクライアントを生成
         self.muldiv_mcp_server = self.create_stdio_mcp_client(
-            command="python",  
-            args=["./muldiv_server.py"],
+            command="uv",  
+            args=["run", "./muldiv_server.py"],
         )
 
     def create_stdio_mcp_client(
