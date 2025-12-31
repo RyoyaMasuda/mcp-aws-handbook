@@ -6,5 +6,5 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "rich==14.2.0",
-    "strands-agents==1.15.0",
+    "strands-agents==1.20.0",
 ]
