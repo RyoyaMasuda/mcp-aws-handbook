@@ -54,7 +54,7 @@ async def handle_sampling_callback(
     send_contents = [{"text": msg.content.text} for msg in request_params.messages]
     # list[ContentBlock]型に変換 [{"text: "LLMに送信する内容"}...] の形式
 
-    model_id = "us.amazon.nova-lite-v1:0"
+    model_id = "us.amazon.nova-2-lite-v1:0"
 
     model = BedrockModel(
         model_id=model_id,
