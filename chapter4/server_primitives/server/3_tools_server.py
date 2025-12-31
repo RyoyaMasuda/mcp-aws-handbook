@@ -14,7 +14,7 @@ def translation(lang: str) -> str:
 
 @mcp.prompt(title="Tag Info")
 def tag_info(service_name: str) -> str:
-    print("translation")
+    print("tag_info")
     return (
         f"{service_name}に関するタグ情報をget_tag_infoツールを使って取得してください。"
     )
@@ -60,7 +60,6 @@ async def get_tag_info(tag: str) -> str:
     """
 
     response = requests.get(f"https://qiita.com/api/v2/tags/{tag}")
-    response.json()
 
     return json.dumps(response.json(), indent=2, ensure_ascii=False)
 
