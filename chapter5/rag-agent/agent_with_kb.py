@@ -10,7 +10,7 @@ from typing import List, Dict
 class RagAgent:
     def __init__(self):
         """RAGエージェントを初期化"""
-        # AWS MCPサーバーへの接続
+        # AAWS MCP Serverへの接続
         self.aws_mcp_client = self.create_stdio_mcp_client(
             command="uvx",
             args=[
@@ -23,10 +23,10 @@ class RagAgent:
                 "AWS_SECRET_ACCESS_KEY":os.getenv("AWS_SECRET_ACCESS_KEY"),
             }
         )
-        # AWS Bedrock Knowledge Base Retrieval MCPサーバーへの接続設定
+        # AWS Bedrock Knowledge Base Retrieval MCP Serverへの接続設定
         self.aws_kb_mcp_client = self.create_stdio_mcp_client(
             command="uvx",  # uvxコマンドを使用してMCPサーバーを起動
-            args=["awslabs.bedrock-kb-retrieval-mcp-server@1.0.12"],
+            args=["awslabs.bedrock-kb-retrieval-mcp-server@1.0.13"],
             env={
                 "AWS_ACCESS_KEY_ID": os.getenv("AWS_ACCESS_KEY_ID"),
                 "AWS_SECRET_ACCESS_KEY": os.getenv("AWS_SECRET_ACCESS_KEY"),
@@ -48,7 +48,7 @@ class RagAgent:
         # エージェントを初期化
         return Agent(
             model=BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0"),
-            system_prompt="AWSに関する質問はAWS MCPサーバを用いて、システム設計情報についてはBedrock Knowledge Retrieval Base MCPサーバーを用いて回答してください。その参考先も定義してください。",
+            system_prompt="AWSに関する質問はAWS MCP Serverを用いて、システム設計情報についてはBedrock Knowledge Retrieval Base MCP Serverを用いて回答してください。その参考先も定義してください。",,
             tools=tools,
             callback_handler=None,
         )

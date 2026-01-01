@@ -1,4 +1,3 @@
-# Python 3.13とNode.jsの両方を含むベースイメージを使用
 FROM public.ecr.aws/lambda/python:3.13
 
 

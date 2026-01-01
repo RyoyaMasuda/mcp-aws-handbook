@@ -15,7 +15,7 @@ st.title("RAGチャットアプリ")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# RAGチャットアプリの初期化
+# RAGAgentの初期化
 if "agent" not in st.session_state:
     st.session_state.agent = RagAgent()
 
