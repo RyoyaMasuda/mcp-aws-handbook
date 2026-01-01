@@ -2,7 +2,7 @@ from rich import print
 from rich.panel import Panel
 from rich.prompt import Prompt
 
-print("こんにちは")
+print("こんにちは")  # Richライブラリのprint関数が呼び出される
 
 print("[cyan]青色のテキスト[/cyan]")
 print("[yellow]黄色のテキスト[/yellow]")

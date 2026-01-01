@@ -11,6 +11,7 @@ async def translate(language: str, content: str, ctx: Context) -> dict:
         language: 翻訳先の言語（日本語、英語など）
         content: 翻訳する内容
     """
+
     sampling_result = await ctx.session.create_message(
         system_prompt="あなたは優秀な翻訳家です。翻訳結果だけを回答してください。",
         messages=[
@@ -25,7 +26,7 @@ async def translate(language: str, content: str, ctx: Context) -> dict:
         temperature=0.1,
         max_tokens=1024,
     )
-    
+
     return {
         "content": sampling_result.content.text,
     }

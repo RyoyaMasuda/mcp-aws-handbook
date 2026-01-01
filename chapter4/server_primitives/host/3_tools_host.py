@@ -14,6 +14,7 @@ from strands.tools.mcp import MCPAgentTool, MCPClient
 from strands.types.content import ContentBlock, Message
 
 
+# デコレータ関数を定義
 def with_mcp_client(func) -> ClientSession:
     async def wrapper(*args, **kwargs):
         server_params = StdioServerParameters(
@@ -81,7 +82,9 @@ async def main(mcp_client: MCPClient):
             if st.checkbox(tool.tool_name, value=True):
                 select_tool.append(tool)
 
-    if input := st.chat_input(key="chat_input"):
+    if input := st.chat_input(
+        key="chat_input"
+    ):  # keyの指定を追加。該当のkeyで保持された値がセットされる
         user_content: list[ContentBlock] = []
 
         user_content.append({"text": input})
@@ -98,7 +101,7 @@ async def main(mcp_client: MCPClient):
 
         agent = Agent(
             model=model,
-            tools=select_tool,
+            tools=select_tool,  # ここを追加
             callback_handler=None,
         )
 
