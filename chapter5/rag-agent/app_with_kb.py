@@ -1,7 +1,7 @@
 import asyncio
 import nest_asyncio
 import streamlit as st
-from agent_with_kb import RagAgent
+from agent_with_kb import RagAgent # ここを変更
 
 nest_asyncio.apply()
 
