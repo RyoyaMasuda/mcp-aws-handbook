@@ -59,7 +59,7 @@ class ResearchAgent:
         tavily_url = f"https://mcp.tavily.com/mcp/?tavilyApiKey={self.tavily_api_key}"
         self.tavily_client = create_streamable_http_mcp_client(tavily_url)
 
-    def _create_agent(self, tools: List) -> Agent:
+    def create_agent(self, tools: List) -> Agent:
         """Strands Agentを作成"""
         # Bedrockのモデルを定義
         model = BedrockModel(model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0")
@@ -80,7 +80,7 @@ class ResearchAgent:
                 tools.extend(self.sequential_thinking_client.list_tools_sync())
 
                 # エージェントを作成してレポート生成を開始
-                agent = self._create_agent(tools)
+                agent = self.create_agent(tools)
                 content = agent(query)
 
 
