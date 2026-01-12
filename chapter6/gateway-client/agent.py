@@ -57,7 +57,7 @@ def invoke_agent():
         # エージェントを初期化
         agent = Agent(
             model=model,
-            tools=[mcp_tools]
+            tools=mcp_tools
         )
         agent(PROMPT)
 
