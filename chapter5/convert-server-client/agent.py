@@ -1,6 +1,7 @@
 import os
 from mcp.client.stdio import stdio_client, StdioServerParameters
 from mcp_proxy_for_aws.client import aws_iam_streamablehttp_client
+from mcp_proxy_for_aws.utils import determine_service_name
 from strands import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp import MCPClient
@@ -39,7 +40,7 @@ def get_mcp_endpoint() -> str:
 
 prompt = """
 DynamoDBのtech-reportテーブルから最新の技術レポートを取得して、それをPPT形式に変換してください。
-完了後は変換したファイルを取得するURLをユーザへ明示してください。
+完了後は変換したファイルを取得するURLをユーザーへ明示してください。
 """
 def main():
     mcp_endpoint = get_mcp_endpoint()

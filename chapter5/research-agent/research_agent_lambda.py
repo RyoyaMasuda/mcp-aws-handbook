@@ -32,7 +32,7 @@ class ResearchAgent:
 
 
     SYSTEM_PROMPT = """
-ユーザプロンプトで指定された日付を基準とした日本における技術トピックを深掘りした調査レポートをMarkdown形式で作成してください。
+ユーザープロンプトで指定された日付を基準とした日本における技術トピックを深掘りした調査レポートをMarkdown形式で作成してください。
 調査レポートはトピックごとに分けて、最大5個の技術トピックを深堀して、まとめてください。
 - 条件
   - Tavily MCP ServerとSequential Thinking MCP Serverを用いてください
