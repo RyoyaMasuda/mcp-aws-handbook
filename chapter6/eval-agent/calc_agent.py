@@ -161,8 +161,8 @@ async def eval_mcp_use(input, output, mcp_servers, call_tool_results):
     await deepeval_model.close()
 
 def evaluateAgent():
-    """メイン実行関数：RAGエージェントの動作例とMCP評価のデモ"""
-    # RAGエージェントを初期化
+    """メイン実行関数：数値計算エージェントの動作例とMCP評価のデモ"""
+    # 数値計算エージェントを初期化
     calc_agent = CalcAgent()
    
     # テスト用クエリ
