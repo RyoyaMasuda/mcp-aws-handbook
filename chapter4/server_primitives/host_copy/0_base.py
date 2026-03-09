@@ -1,14 +1,14 @@
 import asyncio
+
 import streamlit as st
 from strands.agent import Agent
 from strands.models import BedrockModel
 from strands.types.content import ContentBlock, Message
-from dotenv import load_dotenv
 
-load_dotenv()
 
 async def main():
     st.title("Chat with MCP")
+
     if input := st.chat_input():
         user_content: list[ContentBlock] = []
 
@@ -25,23 +25,20 @@ async def main():
         )
 
         agent = Agent(model=model, callback_handler=None)
+
         agent_stream = agent.stream_async([user_message])
 
         async for event in agent_stream:
             if "message" in event:
                 message: Message = event["message"]
 
-                # event = {message: {"role": "user or assistant", "content": [{"text": "hogehoge"}]}}
-                # みたいな感じになっている。
-            
                 with st.chat_message(message["role"]):
-                    # message["content"]はリスト、contentは辞書
                     for content in message["content"]:
-                        # content(辞書)のkeyに"text"が含まれている場合はtextを書き出す。
                         if "text" in content:
                             st.write(content["text"])
                         else:
                             st.json(content, expanded=1)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
