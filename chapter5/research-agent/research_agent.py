@@ -5,6 +5,8 @@ from mcp.client.streamable_http import streamable_http_client
 from strands import Agent
 from strands.models import BedrockModel
 from strands.tools.mcp.mcp_client import MCPClient
+from dotenv import load_dotenv
+load_dotenv("/Users/ryoyamasuda/Documents/git-repo-RyoyaMasuda/mcp-aws-handbook/.env")
 
 # タイムアウト時間
 STARTUP_TIMEOUT = 90
