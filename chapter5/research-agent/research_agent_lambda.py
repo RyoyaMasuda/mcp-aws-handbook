@@ -103,3 +103,4 @@ def lambda_handler(event, context):
     agent = ResearchAgent()
     response = agent.generate_report(date)
     return str(response)
+    

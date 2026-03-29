@@ -1,0 +1,10 @@
+認証トークンを取得し、レジストリに対して Docker クライアントを認証します。AWS CLI を使用してください:
+aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 035261964577.dkr.ecr.us-west-2.amazonaws.com
+注意: AWS CLI の使用中にエラーが発生した場合は、最新バージョンの AWS CLI と Docker がインストールされていることを確認してください。
+以下のコマンドを使用して、Docker イメージを構築します。一から Docker ファイルを構築する方法については、「こちらをクリック 」の手順を参照してください。既にイメージが構築されている場合は、このステップをスキップします。
+☓ docker build -t research-agent .
+docker buildx build --platform linux/amd64 --provenance=false -t 035261964577.dkr.ecr.us-west-2.amazonaws.com/research-agent:v0.0.2 --push .
+構築が完了したら、このリポジトリにイメージをプッシュできるように、イメージにタグを付けます。
+docker tag research-agent:latest 035261964577.dkr.ecr.us-west-2.amazonaws.com/research-agent:v0.0.2
+以下のコマンドを実行して、新しく作成した AWS リポジトリにこのイメージをプッシュします:
+docker push 035261964577.dkr.ecr.us-west-2.amazonaws.com/research-agent:v0.0.2
